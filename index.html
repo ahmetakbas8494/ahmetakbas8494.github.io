@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/model/iphone14.js" type="text/babel" defer></script>
+    <script src="js/model/0x2-1.js" type="text/babel" defer></script>
+    <script src="js/model/sama525g.js" type="text/babel" defer></script>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      rel="shortcut icon"
+      href="https://media.discordapp.net/attachments/1149065027890978846/1158337680195731476/y7huk.png"
+      type="image/x-icon"
+    />
+    <title>FlowerShop</title>
+  </head>
+  <body>
+    <div
+      id="kms"
+      style="height: 0; width: 0px; background-color: whitesmoke"
+    ></div>
+
+    <div id="root"></div>
+
+    <script type="text/babel" defer>
+      // Images
+      let root = document.getElementById("root");
+      root.classList.add("root-dark");
+
+      function Run() {
+        return (
+          <div>
+            <nav>
+              <img
+                id="obywatelTop"
+                stlye="z-index:100"
+                class="max-width fixed"
+                alt=""
+              />
+              <img id="obywatelBottom" class="max-width fixed" alt="" />
+            </nav>
+            <div class="margin"></div>
+            <p id="time">
+              Stan na dzień <p id="time-input">a</p>
+            </p>
+            <div class="info-container">
+              <img id="obywatelContainer" class="max-width" alt="" />
+              <div class="con-1">
+                <img id="obywatelImage" alt="" />
+                <img id="obywatelFlag" alt="" />
+              </div>
+
+              <div class="con-2">
+                <input type="text" class="input" placeholder="Imiona" />
+                <input type="text" class="input" placeholder="Nazwisko" />
+                <input
+                  type="text"
+                  id="obywatelstwo"
+                  class="input"
+                  placeholder="Obywatelstwo"
+                />
+                <input type="text" class="input" placeholder="Pesel" />
+                <input type="text" class="input" placeholder="Data urodzenia" />
+              </div>
+            </div>
+            <img id="obywatelInfo1" class="max-width" alt="" />
+            <img id="obywatelInfo2" class="max-width" alt="" />
+            <img id="obywatelInfo3" class="max-width" alt="" />
+            <img id="obywatelInfo4" class="max-width" alt="" />
+            <div id="onepx"></div>
+          </div>
+        );
+      }
+      function runApp(guiImgs, faceImg, viewport, definfo, type) {
+        let elem = document.body;
+        let q = document.documentElement;
+        elem.style.overflow = "hidden !important";
+        // if (q.requestFullscreen) {
+        //   q.requestFullscreen();
+        // } else if (document.mozRequestFullScreen) {
+        //   q.mozRequestFullScreen();
+        // } else if (q.webkitRequestFullscreen) {
+        //   q.webkitRequestFullscreen();
+        // } else if (q.msRequestFullscreen) {
+        //   q.msRequestFullscreen();
+        // }
+        root.classList.remove("root-dark");
+        ReactDOM.render(<Run />, root);
+        setTimeout(() => {
+          function setAtt(id, type, text) {
+            document.getElementById(id).setAttribute(type, text);
+          }
+
+          //function insertInfo(info,query)
+          document.querySelector(
+            "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(1)"
+          ).value = definfo[0];
+          document.querySelector(
+            "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(2)"
+          ).value = definfo[1];
+          document.querySelector(
+            "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(3)"
+          ).value = definfo[2];
+          document.querySelector(
+            "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(4)"
+          ).value = definfo[3];
+          setAtt("obywatelTop", "src", guiImgs[0]);
+          setAtt("obywatelInfo1", "src", guiImgs[2]);
+          if (type === 1) {
+            document.querySelector("#obywatelstwo").remove();
+            setAtt("obywatelContainer", "src", guiImgs[2]);
+            setAtt("obywatelInfo1", "src", guiImgs[3]);
+            setAtt("obywatelBottom", "src", guiImgs[1]);
+            setAtt("obywatelInfo2", "src", guiImgs[4]);
+            setAtt("obywatelInfo3", "src", guiImgs[5]);
+            setAtt("obywatelInfo4", "src", guiImgs[6]);
+            setAtt("obywatelFlag", "src", guiImgs[7]);
+          } else {
+            setAtt("obywatelFlag", "src", guiImgs[3]);
+            document.querySelector(
+              "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(3)"
+            ).value = definfo[4];
+            document.querySelector(
+              "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(4)"
+            ).value = definfo[2];
+            document.querySelector(
+              "#root > div > div.info-container > div.con-2 > input[type=text]:nth-child(5)"
+            ).value = definfo[3];
+            setAtt("obywatelContainer", "src", guiImgs[1]);
+            for (var i = 0; i < 3; +i++) {
+              document.querySelector("#obywatelInfo" + (i + 2)).remove();
+            }
+          }
+          if (viewport === "iphone-13-14") {
+            if (viewport === "iphone-13-14") Iphone14(type);
+            else elseVP();
+            let t = new Date();
+            setTimeout(() => {
+              document.getElementById("time-input").innerText =
+                t.getDate() +
+                " " +
+                monthName(t.getMonth() + 1) +
+                " " +
+                t.getFullYear();
+            }, 1);
+          } else if (type === 2) {
+            if (viewport === "0x2-1") x021(type);
+            else if (viewport === "sama525g") sama525g(type);
+            else elseVP();
+
+            let kms = document.querySelector("#kms").style;
+            kms.height = "100vh";
+            kms.width = "100%";
+            kms.opacity = "1";
+            kms.color = "black";
+            kms.background = "linear-gradient(180deg,#D5EEFE 10%, #fff 80%)";
+            document.querySelector("#obywatelInfo1").onclick = function () {
+              disableScroll();
+            };
+            let t = new Date();
+            document.querySelector("#time").innerHTML =
+              'Czas:<timeinput id="time-input">a</timeinput>';
+            setInterval(() => {
+              document.getElementById("time-input").innerText =
+                monthZero(new Date().getHours()) +
+                ":" +
+                monthZero(new Date().getMinutes()) +
+                ":" +
+                monthZero(new Date().getSeconds()) +
+                " " +
+                monthZero(t.getDate()) +
+                "." +
+                monthZero(t.getMonth() + 1) +
+                "." +
+                t.getFullYear();
+            }, 10);
+          } else {
+            elseVP();
+          }
+          setAtt("obywatelImage", "src", faceImg);
+        }, 1);
+      }
+
+      function Start() {
+        return (
+          <div class="fixed-center">
+            <h1>Witaj!</h1>
+            <label id="config" for="upload">
+              Wczytaj config
+            </label>
+            <input type="file" id="upload" />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Start />, root);
+      setTimeout(() => {
+        let upload = document.getElementById("upload");
+        upload.addEventListener("change", () => {
+          let fr = new FileReader();
+          fr.readAsText(upload.files[0]);
+          fr.onload = function () {
+            let res = JSON.parse(fr.result);
+            console.log(res);
+            runApp(
+              res.images.essentials,
+              res.images.image,
+              res.viewport,
+              [
+                res.defaultInfo.name,
+                res.defaultInfo.surname,
+                res.defaultInfo.ssn,
+                res.defaultInfo.birth,
+                res.defaultInfo.nationality,
+              ],
+              res.type
+            );
+          };
+        });
+      }, 1);
+    </script>
+  </body>
+</html>
