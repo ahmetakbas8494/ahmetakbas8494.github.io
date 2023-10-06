@@ -79,15 +79,6 @@
         let elem = document.body;
         let q = document.documentElement;
         elem.style.overflow = "hidden !important";
-        // if (q.requestFullscreen) {
-        //   q.requestFullscreen();
-        // } else if (document.mozRequestFullScreen) {
-        //   q.mozRequestFullScreen();
-        // } else if (q.webkitRequestFullscreen) {
-        //   q.webkitRequestFullscreen();
-        // } else if (q.msRequestFullscreen) {
-        //   q.msRequestFullscreen();
-        // }
         root.classList.remove("root-dark");
         ReactDOM.render(<Run />, root);
         setTimeout(() => {
@@ -187,12 +178,18 @@
 
       function Start() {
         return (
-          <div class="fixed-center">
+          <div class="fixed-center hello">
             <h1>Witaj!</h1>
-            <label id="config" for="upload">
+            <label id="config" for="upload" class="button-redirect">
               Wczytaj config
             </label>
             <input type="file" id="upload" />
+            <a href="tutorial.html" class="button-redirect">
+              Poradnik
+            </a>
+            <a href="getSize.html" class="button-redirect">
+              getSize.html
+            </a>
           </div>
         );
       }

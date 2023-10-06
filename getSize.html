@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://media.discordapp.net/attachments/1149065027890978846/1158337680195731476/y7huk.png"
+      type="image/x-icon"
+    />
+    <title>Italian Rose 5$ | -50% SALE</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="main-container root-dark">
+      <label for="dimensions-button" class="button-redirect" id="toggle"
+        >Toggle fullscreen</label
+      >
+      <button name="but" id="dimensions-button" type="button"></button>
+      <div id="dimensions-result"></div>
+      <a href="." id="back" class="button-redirect">Go back</a>
+    </div>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        height: 101vh !important;
+      }
+      ::-webkit-scrollbar {
+        width: auto;
+      }
+      .main-container {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      #toggle {
+        font-size: 1.3rem;
+      }
+
+      #dimensions-button {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        opacity: 0;
+      }
+
+      #dimensions-result {
+        margin-top: 22px;
+        font-size: 1.2rem;
+      }
+
+      #back {
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+      }
+    </style>
+
+    <script>
+      const dimensionsButton = document.getElementById("dimensions-button");
+      const dimensionsResult = document.getElementById("dimensions-result");
+
+      dimensionsButton.addEventListener("click", () => {
+        let q = document.documentElement;
+        if (q.requestFullscreen) {
+          q.requestFullscreen();
+        } else if (document.mozRequestFullScreen) {
+          q.mozRequestFullScreen();
+        } else if (q.webkitRequestFullscreen) {
+          q.webkitRequestFullscreen();
+        } else if (q.msRequestFullscreen) {
+          q.msRequestFullscreen();
+        }
+      });
+
+      setInterval(() => {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        const dimensionsInfo = `
+                    Window Width: ${windowWidth}px<br>
+                    Window Height: ${windowHeight}px
+                `;
+
+        dimensionsResult.innerHTML = dimensionsInfo;
+      }, 1);
+    </script>
+  </body>
+</html>
