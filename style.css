@@ -1,0 +1,272 @@
+* {
+  padding: 0;
+  margin: 0;
+
+  --background-color: #0f0f2d;
+  --font-color: #fff;
+  --gold-color: goldenrod;
+  --outline: #438d98;
+}
+
+h1,
+h2,
+h3,
+p,
+div,
+::after {
+  font-family: "Inter", sans-serif;
+  color: var(--font-color);
+}
+
+p,
+div {
+  font-size: 0.7rem;
+}
+h3 {
+  font-size: 0.8rem;
+  margin: 0.4rem 0;
+}
+h1 {
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+h2 {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+body {
+  color: var(--background-color);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  /* background-image: url("img/background-2816x1536.png");
+  background-size: cover;
+  background-position: center; */
+  background-repeat: no-repeat;
+  filter: blur(10px);
+  transform: scale(1.1);
+  z-index: -1;
+}
+
+.dosage-type::before {
+  display: block;
+  text-align: center;
+}
+
+.micro::before {
+  content: "Micro";
+}
+
+.low::before {
+  content: "Low";
+}
+
+.medium::before {
+  content: "Medium";
+}
+
+.strong::before {
+  content: "Strong";
+}
+
+.heroic::before {
+  content: "Heroic";
+}
+
+.dosage-type {
+  position: relative;
+  text-align: center;
+}
+
+.dosage-title {
+  text-align: center;
+}
+.dosage-guide {
+  display: flex;
+  justify-content: space-around;
+  height: 6rem;
+  position: relative;
+  align-items: center;
+}
+.dosage-guide > div {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 5rem;
+  position: relative;
+}
+
+.dosage-guide img {
+  height: 50%;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--background-color);
+  width: 89%;
+  margin: 0.2rem 0 0 5%;
+  padding: 0 1% 1rem 1%;
+  border-radius: 1rem;
+}
+
+.guide {
+  display: flex;
+  flex-direction: column;
+}
+
+.bag-content {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.bag-content-amount {
+  height: 4rem;
+  width: 4rem;
+  background: #0f0f2d;
+  background: radial-gradient(
+    circle,
+    var(--background-color) 50%,
+    var(--outline) 100%
+  );
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  font-weight: bold;
+}
+
+.lemon-tek {
+  margin-top: 1rem;
+}
+.lemon-tek-title {
+  margin-bottom: 1rem;
+}
+.about-title,
+.lemon-tek-title {
+  text-align: center;
+}
+
+.about-info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.about-image {
+  height: 5rem;
+  margin-left: 1rem;
+}
+
+.steps
+ /*,section */ {
+  /*border: 1px solid var(--outline);
+  -webkit-box-shadow: 0 0 0.3rem 0 var(--outline);
+  -moz-box-shadow: 0 0 0.3rem 0 var(--outline);
+  box-shadow: 0 0 0.3rem 0 var(--outline); */
+  display: flex;
+}
+
+.steps > img {
+  width: 6rem;
+  margin: 0 0.5rem;
+}
+
+.steps,
+.about {
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+  background: #438d98;
+  background: linear-gradient(
+    10deg,
+    var(--outline) -100%,
+    var(--background-color) 100%
+  );
+  border: 1px solid var(--outline);
+  -webkit-box-shadow: 0 0 0.3rem 0 var(--outline);
+  -moz-box-shadow: 0 0 0.3rem 0 var(--outline);
+  box-shadow: 0 0 0.3rem 0 var(--outline);
+}
+
+/* Loading */
+.loading {
+  position: fixed;
+  z-index: 10;
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  transition: all 0.5s;
+}
+
+.loading img {
+  width: 10rem;
+  z-index: 15;
+  position: relative;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.wrapper::before {
+  display: block;
+  position: fixed;
+  content: "";
+  z-index: 11;
+  background: var(--outline);
+  width: 10rem;
+  aspect-ratio: 151/197;
+
+  background: conic-gradient(
+    from var(--angle),
+    var(--background-color) 50%,
+    var(--outline),
+    var(--background-color) 80%
+  );
+  animation: rotate-gradient 2s linear infinite;
+}
+
+.wrapper div {
+  transition: all 0.5s;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 16;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background-color: var(--background-color);
+}
+
+.loaded {
+  opacity: 1 !important;
+}
+.hidden {
+  opacity: 0 !important;
+}
+@keyframes rotate-gradient {
+  to {
+    --angle: 360deg;
+  }
+}
