@@ -117,7 +117,7 @@ body::before {
 .dosage-guide img {
   height: 50%;
 }
-section {
+.guide-section {
   display: flex;
   flex-direction: column;
   align-items: center;
