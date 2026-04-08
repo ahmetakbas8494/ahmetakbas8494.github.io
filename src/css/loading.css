@@ -1,0 +1,70 @@
+.loading {
+  position: fixed;
+  z-index: 10;
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  transition: all 0.5s;
+}
+
+.loading img {
+  width: 10rem;
+  z-index: 15;
+  position: relative;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.wrapper::before {
+  display: block;
+  position: fixed;
+  content: "";
+  z-index: 11;
+  background: var(--outline);
+  width: 10rem;
+  aspect-ratio: 151/197;
+
+  background: conic-gradient(
+    from var(--angle),
+    var(--background-color) 50%,
+    var(--outline),
+    var(--background-color) 80%
+  );
+  animation: rotate-gradient 2s linear infinite;
+}
+
+.wrapper div {
+  transition: all 0.5s;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 16;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background-color: var(--background-color);
+}
+
+.loaded {
+  opacity: 1 !important;
+}
+.hidden {
+  opacity: 0 !important;
+}
+@keyframes rotate-gradient {
+  to {
+    --angle: 360deg;
+  }
+}

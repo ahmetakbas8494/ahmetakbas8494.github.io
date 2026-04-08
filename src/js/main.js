@@ -1,6 +1,6 @@
-let lang = "en";
+let lang = "pl";
 const params = new URLSearchParams(window.location.search);
-history.replaceState(null, "", "/");
+//history.replaceState(null, "", "/");
 const type = params.get("t");
 let weight = params.get("w");
 weight = parseFloat(weight);
@@ -15,7 +15,6 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     loadingScreen.innerHTML = "";
     setTimeout(() => {
-      console.log("removing loading screen");
       loadingScreen.classList.add("hidden");
     }, 1);
   }, 500);
@@ -33,6 +32,9 @@ const bagContentDescription = document.querySelector(
   ".bag-content-description",
 );
 const steps = document.querySelectorAll(".steps");
+const tripTimerTitle = document.querySelector(".trip-timer-title");
+
+
 let tutorialDescriptions = [
   [
     "Grind mushrooms into a fine powder to increase the surface area.",
@@ -66,7 +68,7 @@ for (let step of steps) {
 }
 
 const aboutImage = document.querySelector(".about-image");
-aboutImage.src = "/img/melmak-small.png";
+aboutImage.src = "src/img/melmak-small.png";
 const lemonTekTitle = document.querySelector(".lemon-tek-title");
 lemonTekTitle.innerText =
   lang === "en" ? "Lemon Tek Guide" : "Lemon Tek Poradnik";
