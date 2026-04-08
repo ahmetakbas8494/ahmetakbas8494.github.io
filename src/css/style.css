@@ -4,8 +4,9 @@
 
   --background-color: #0f0f2d;
   --font-color: #fff;
-  --gold-color: goldenrod;
+  --wrong-color: #b81414;
   --outline: #438d98;
+  transition: all 0.5s;
 }
 
 h1,
@@ -186,12 +187,7 @@ body::before {
   margin-left: 1rem;
 }
 
-.steps
- /*,section */ {
-  /*border: 1px solid var(--outline);
-  -webkit-box-shadow: 0 0 0.3rem 0 var(--outline);
-  -moz-box-shadow: 0 0 0.3rem 0 var(--outline);
-  box-shadow: 0 0 0.3rem 0 var(--outline); */
+.steps {
   display: flex;
 }
 
