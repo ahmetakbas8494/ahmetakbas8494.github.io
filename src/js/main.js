@@ -1,6 +1,6 @@
 let lang = "pl";
 const params = new URLSearchParams(window.location.search);
-//history.replaceState(null, "", "/");
+history.replaceState(null, "", "/");
 const type = params.get("t");
 let weight = params.get("w");
 weight = parseFloat(weight);
