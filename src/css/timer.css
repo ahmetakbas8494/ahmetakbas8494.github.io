@@ -26,8 +26,8 @@
 .trip-timer-overlay {
   overflow: hidden;
   position: fixed;
-  width: 95vw;
-  height: 95vh;
+  width: 95%;
+  height: 95%;
   top: 150%;
   left: 50%;
   transform: translate(-50%, -50%);
