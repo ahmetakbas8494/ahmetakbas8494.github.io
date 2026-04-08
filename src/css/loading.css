@@ -1,3 +1,9 @@
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .loading {
   position: fixed;
   z-index: 10;
@@ -21,35 +27,19 @@
   position: relative;
 }
 
-@property --angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
 .wrapper::before {
   display: block;
   position: fixed;
   content: "";
   z-index: 11;
   background: var(--outline);
-  width: 10rem;
+  width: 9.8rem;
+  margin: 0 0.1rem;
   aspect-ratio: 151/197;
-
   background: conic-gradient(
     from var(--angle),
     var(--background-color) 50%,
     var(--outline),
-    var(--background-color) 80%
-  );
-  animation: rotate-gradient 2s linear infinite;
-}
-
-.denied::before {
-  background: conic-gradient(
-    from var(--angle),
-    var(--background-color) 50%,
-    var(--wrong-color),
     var(--background-color) 80%
   );
   animation: rotate-gradient 2s linear infinite;
@@ -74,7 +64,9 @@
 }
 
 .loading-text {
-  color: var(--wrong-color);
+  color: var(--outline);
+  font-weight: bold;
+  letter-spacing: 0.1rem;
   font-size: 1rem;
   text-align: center;
   opacity: 0;

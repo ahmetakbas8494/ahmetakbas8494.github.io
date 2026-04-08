@@ -2,9 +2,9 @@
   padding: 0;
   margin: 0;
 
+  --background-color-invisible: #0f0f2d00;
   --background-color: #0f0f2d;
   --font-color: #fff;
-  --wrong-color: #b81414;
   --outline: #438d98;
   transition: all 0.5s;
 }
@@ -14,9 +14,20 @@ h2,
 h3,
 p,
 div,
+button,
+input,
+label,
+span,
 ::after {
   font-family: "Inter", sans-serif;
   color: var(--font-color);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 h1 {
@@ -27,7 +38,11 @@ h2 {
 }
 
 p,
-div {
+div,
+label,
+span,
+input,
+button {
   font-size: 0.7rem;
 }
 h3 {
@@ -57,9 +72,6 @@ body::before {
   width: 100%;
   height: 100%;
   background-color: var(--background-color);
-  /* background-image: url("img/background-2816x1536.png");
-  background-size: cover;
-  background-position: center; */
   background-repeat: no-repeat;
   filter: blur(10px);
   transform: scale(1.1);
@@ -201,10 +213,11 @@ body::before {
 
 .steps,
 .about,
-.trip-timer {
+.trip-timer,
+.trip-timer button,
+.trip-timer-overlay {
   border-radius: 0.5rem;
   margin: 0.5rem 0;
-  background: #438d98;
   background: linear-gradient(
     10deg,
     var(--outline) -100%,

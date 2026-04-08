@@ -13,6 +13,8 @@
     <title>ShroomID</title>
     <link rel="stylesheet" href="src/css/style.css" />
     <link rel="stylesheet" href="src/css/loading.css" />
+    <link rel="stylesheet" href="src/css/timer.css" />
+    <script src="src/js/lang.js" defer></script>
     <script src="src/js/main.js" defer></script>
     <script src="src/js/loading.js" defer></script>
     <script src="src/js/timer.js" defer></script>
@@ -74,6 +76,23 @@
           </div>
         </div>
 
+        <section class="trip-timer">
+          <h2 class="trip-timer-title">trip-timer-title</h2>
+          <div class="trip-timer-description">trip-timer-description</div>
+          <button class="trip-timer-start" onclick="startTimer()">trip-timer-start</button>
+          <div class="trip-timer-overlay" minimized="false" stage="1" stagetype="?">
+            <div class="trip-timer-controls">
+              <button class="trip-timer-minimize" onclick="minimizeTimer()">-</button>
+              <button class="trip-timer-close" onclick="closeTimer()">x</button>
+            </div>
+            <div class="trip-timer-content">
+              
+            </div>
+            <button class="trip-timer-next" onclick="nextTimer()">trip-timer-next</button>
+
+          </div>
+        </section>
+
         <div class="lemon-tek">
           <h2 class="lemon-tek-title">lemon-tek-title</h2>
           <div class="lemon-tek-tutorial">
@@ -114,7 +133,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </>
     </section>
   </body>
 </html>
