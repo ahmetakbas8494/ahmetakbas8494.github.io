@@ -3,10 +3,9 @@ const loadingWrapper = document.querySelector(".wrapper");
 const loadingText = document.querySelector(".loading-text");
 const guideSection = document.querySelector(".guide-section");
 
-
 window.addEventListener("load", () => {
   if (type !== "mel" || isNaN(weight) || weight <= 0) {
-    // alert("⚠️ Please scan QR code on the bag to access the guide.");
+    loadingText.innerText = selectLanguage(guideTranslation.denied);
     document.body.removeChild(guideSection);
     loadingText.classList.add("show");
     return;

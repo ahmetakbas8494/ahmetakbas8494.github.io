@@ -126,4 +126,8 @@ const guideTranslation = {
       pl: ["Torba zawiera", "g Melmaka"],
     },
   },
+  denied: {
+    en: "Access denied\nScan QR code on the bag",
+    pl: "Odmowa dostępu\nZeskanuj kod QR z torby",
+  },
 };
