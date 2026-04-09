@@ -4,8 +4,9 @@
 // getting parameters from URL
 const params = new URLSearchParams(window.location.search);
 const type = params.get("t");
-let weight = parseFloat(params.get("w").replace(/[^0-9.]/g, ""));
-let lang = params.get("l")
+let weight = parseFloat(params.get("w"));
+weight = weight > 0 ? weight.replace(/[^0-9.]/g, "") : weight;
+let lang = params.get("l");
 // cleaning the URL
 history.replaceState(null, "", "/"); // uncomment if commented
 
