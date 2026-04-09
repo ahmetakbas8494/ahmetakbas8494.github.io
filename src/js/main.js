@@ -4,7 +4,7 @@
 // getting parameters from URL
 const params = new URLSearchParams(window.location.search);
 const type = params.get("t");
-let weight = parseFloat(params.get("w"));
+let weight = params.get("w");
 weight =
   parseFloat(weight) > 0 ? parseFloat(weight.replace(/[^0-9.]/g, "")) : weight;
 let lang = params.get("l");
