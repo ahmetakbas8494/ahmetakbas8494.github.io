@@ -67,8 +67,102 @@ const timerTranslation = {
     en: "Open",
     pl: "Otwórz",
   },
+  tripTimerStages: {
+    stage1: {
+      tripTimerContentTitle: {
+        en: "Input dose",
+        pl: "Wybierz dawkę",
+      },
+      tripTimerAmountDescription: {
+        en: "Waiting for input...",
+        pl: "Wpisz dawkę...",
+      },
+    },
+    stage2: {
+      tripTimerContentTitle: {
+        en: "Method of consumption",
+        pl: "Metoda spożycia",
+      },
+      lemonTek: {
+        button: {
+          en: "Lemon Tek",
+          pl: "Lemon Tek",
+        },
+        description: {
+          en: "This method significantly speeds up the onset, while noticeably shortening the total duration of the trip. The experience is more condensed and intense, allowing for a faster return to full sobriety.",
+          pl: "Lemon Tek zapewnia szybszy i mocniejszy start, jednak odbywa się to kosztem krótszego czasu trwania całego procesu. To idealny wybór dla osób szukających intensywnych doznań w bardziej skondensowanej formie.",
+        },
+      },
+      dry: {
+        button: { en: "Dry", pl: "Na sucho" },
+        description: {
+          en: "A traditional method that provides the longest duration of the experience, usually lasting 6 to 8 hours. The effects build up gently and gradually, offering a full, multi-hour dynamic without sudden spikes in intensity.",
+          pl: "To tradycyjna metoda, która zapewnia najdłuższy czas trwania doświadczenia, zazwyczaj od 6 do 8 godzin. Efekty narastają łagodnie i stopniowo, oferując pełną, wielogodzinną dynamikę procesu bez gwałtownych skoków intensywności.",
+        },
+      },
+    },
+    stage3: {
+      tripTimerContentTitle: {
+        en: "Equipment & Ingredients",
+        pl: "Co będzie potrzebne?",
+      },
+      description: {
+        en: "Mushrooms\nCoffee grinder\nGlass or Mug\nLemon or lime\nOptional: Stirring spoon\nOptional: Strainer or paper coffee filter or cheesecloth",
+        pl: "Grzyby\nMłynek do kawy\nSzklanka lub kubek\nCytryna lub limonka\nOpcjonalnie: Łyżeczka do mieszania\nOpcjonalnie: Sitko, papierowy filtr do kawy lub gaza",
+      },
+    },
+    stage4: {
+      tripTimerContentTitle: {
+        en: "Step 1",
+        pl: "Krok 1",
+      },
+      img: "lt-1.png",
+      description: {
+        en: "Grind the mushrooms into a fine powder using a coffee grinder. The finer the texture, the greater the surface area for the acid to react with, allowing for a faster and more effective extraction of the compounds.",
+        pl: "Zmiel grzyby na drobny proszek przy użyciu młynka do kawy. Im drobniejsza tekstura, tym większa powierzchnia styku z kwasem, co pozwala na szybszą i bardziej skuteczną ekstrakcję substancji.",
+      },
+    },
+    stage5: {
+      tripTimerContentTitle: {
+        en: "Step 2",
+        pl: "Krok 2",
+      },
+      img: "lt-2.png",
+      description: {
+        en: "Place the resulting mushroom powder in a clean glass or mug. Ensure the vessel is large enough to easily hold the powder and juice while leaving enough room to combine the ingredients freely.",
+        pl: "Umieść uzyskany proszek grzybowy w czystej szklance lub kubku. Upewnij się, że naczynie jest wystarczająco duże, aby swobodnie pomieścić pył oraz sok, zachowując miejsce na swobodne połączenie składników.",
+      },
+    },
+    stage6: {
+      tripTimerContentTitle: {
+        en: "Step 3",
+        pl: "Krok 3",
+      },
+      img: "lt-3.png",
+      description: {
+        en: "Pour fresh lemon or lime juice over the powder until it is completely submerged. The citric acid in the fruit begins a pre-processing stage that helps reduce later stomach discomfort.",
+        pl: "Zalej proszek świeżym sokiem z cytryny lub limonki, aż zostanie on całkowicie zakryty. Kwas cytrynowy zawarty w owocach rozpocznie proces wstępnego przetwarzania, który pomaga zredukować późniejszy dyskomfort żołądkowy.",
+      },
+    },
+    stage7: {
+      tripTimerContentTitle: {
+        en: "Step 4",
+        pl: "Krok 4",
+      },
+      img: "lt-4.png",
+      description: {
+        en: "Mix the mixture well (optionally using a stirring spoon) and let it sit for 15–20 minutes. It is recommended to stir the contents every few minutes to ensure the juice reaches every particle of the powder evenly.",
+        pl: "Dobrze wymieszaj miksturę (opcjonalnie używając łyżeczki) i odstaw na 15–20 minut. Zaleca się zamieszanie zawartości co kilka minut, aby sok dotarł równomiernie do każdej drobiny proszku.",
+      },
+    },
+    stage8: {
+      tripTimerContentTitle: {
+        en: "Konsumpcja",
+        pl: "Konsumpcja",
+      },
+    },
+  },
   tripTimerNext: { en: "Next", pl: "Dalej" },
-  tripTimerAmountDescription: { en: "Choose amount...", pl: "Podaj dawkę..." },
 };
 
 // lemon tek

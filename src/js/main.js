@@ -1,16 +1,18 @@
-// setting default language to polish
-let lang = "pl"; // either "en" or "pl"
-const isEnglish = lang === "en" ? true : false;
-function selectLanguage(source) {
-  return isEnglish ? source["en"] : source["pl"];
-}
+// manually setting default language to polish
+// let lang = "pl"; // either "en" or "pl"
 
 // getting parameters from URL
 const params = new URLSearchParams(window.location.search);
 const type = params.get("t");
 let weight = parseFloat(params.get("w").replace(/[^0-9.]/g, ""));
+let lang = params.get("l")
 // cleaning the URL
 //history.replaceState(null, "", "/"); // uncomment if commented
+
+const isEnglish = lang === "en" ? true : false;
+function selectLanguage(source) {
+  return isEnglish ? source["en"] : source["pl"];
+}
 
 // getting all the elements to update their text content
 const guideTitle = document.querySelector(".guide-title");

@@ -1,12 +1,26 @@
 * {
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: all 0.5s;
 
   --background-color-invisible: #0f0f2d00;
   --background-color: #0f0f2d;
   --font-color: #fff;
   --outline: #438d98;
-  transition: all 0.5s;
+  --alt-outline: #52acb9;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 h1,
@@ -31,10 +45,10 @@ button {
 }
 
 h1 {
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
 }
 h2 {
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.05rem;
 }
 
 p,
@@ -215,7 +229,9 @@ body::before {
 .about,
 .trip-timer,
 .trip-timer button,
-.trip-timer-overlay {
+.trip-timer-overlay,
+.trip-timer-lemon-tek-tutorial-timer,
+.trip-timer-content-title {
   border-radius: 0.5rem;
   margin: 0.5rem 0;
   background: linear-gradient(

@@ -79,15 +79,15 @@
           <h2 class="trip-timer-title">trip-timer-title</h2>
           <div class="trip-timer-description">trip-timer-description</div>
           <button class="trip-timer-start" onclick="startTimer()">trip-timer-start</button>
-          <div class="trip-timer-overlay" minimized="false" stage="1" stagetype="?">
+          <div class="trip-timer-overlay" minimized="false" stage="1">
             <div class="trip-timer-controls">
-              <button class="trip-timer-minimize" onclick="minimizeTimer()">-</button>
-              <button class="trip-timer-close" onclick="closeTimer()">x</button>
+              <button class="trip-timer-minimize" onclick="minimizeTimer()">–</button>
+              <button class="trip-timer-close" onclick="closeTimer()">×</button>
             </div>
             <div class="trip-timer-content">
               
             </div>
-            <button class="trip-timer-next" onclick="nextTimer()">trip-timer-next</button>
+            <button class="trip-timer-next" onclick="nextTimer()" disabled>trip-timer-next</button>
 
           </div>
         </section>

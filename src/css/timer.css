@@ -53,6 +53,7 @@
   left: 100%;
   opacity: 0.9;
   transform: translateX(-101%) translateY(-101%);
+  background: var(--background-color) !important;
 }
 
 .trip-timer-overlay-minimize::after {
@@ -76,11 +77,13 @@
   justify-content: space-around;
   position: relative;
   justify-content: flex-end;
+  width: 90%;
+  margin: 1rem 0 1rem 5%;
 }
 
 .trip-timer-controls button {
-  margin: 0.5rem;
-  width: 20%;
+  margin: 0 0.2rem;
+  width: 3.5rem;
   font-size: 1.2rem;
   padding: 0;
 }
@@ -117,6 +120,10 @@ label[for="trip-timer-input-amount"] {
   width: 90%;
 }
 
+.trip-timer-next:disabled {
+  bottom: -50%;
+}
+
 .trip-timer-hide-while-minimized {
   opacity: 0;
   font-size: 0;
@@ -131,4 +138,57 @@ label[for="trip-timer-input-amount"] {
 .trip-timer-content {
   display: grid;
   justify-items: center;
+}
+.trip-timer-content p {
+  width: 80%;
+  margin: 1rem 0;
+}
+
+.trip-timer-lemon-tek-tutorial-timer {
+  width: 80%;
+  text-align: center;
+  margin: 0.5rem 0 0 0;
+}
+
+.trip-timer-lemon-tek-tutorial-minimized .trip-timer-lemon-tek-tutorial-timer {
+  margin: 0;
+}
+
+.trip-timer-lemon-tek-tutorial-timer h3 {
+  color: var(--outline);
+  font-size: 2rem;
+}
+
+.trip-timer-lemon-tek-tutorial-minimized img,
+.trip-timer-lemon-tek-tutorial-minimized p,
+.trip-timer-lemon-tek-tutorial-minimized h1 {
+  height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+}
+.trip-timer-lemon-tek-tutorial-minimized img {
+  width: 0;
+}
+
+.trip-timer-timer-play-button {
+  width: 5rem !important;
+  margin: 0 0 0.5rem 0 !important;
+}
+
+.trip-timer-timer-play-button-hidden {
+  width: 0 !important;
+  font-size: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+  opacity: 0;
+  border: 0 !important;
+}
+
+.trip-timer-content-title {
+  color: var(--alt-outline);
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  width: 80%;
 }
