@@ -5,7 +5,8 @@
 const params = new URLSearchParams(window.location.search);
 const type = params.get("t");
 let weight = parseFloat(params.get("w"));
-weight = weight > 0 ? weight.replace(/[^0-9.]/g, "") : weight;
+weight =
+  parseFloat(weight) > 0 ? parseFloat(weight.replace(/[^0-9.]/g, "")) : weight;
 let lang = params.get("l");
 // cleaning the URL
 history.replaceState(null, "", "/"); // uncomment if commented
