@@ -7,7 +7,7 @@ const type = params.get("t");
 let weight = parseFloat(params.get("w").replace(/[^0-9.]/g, ""));
 let lang = params.get("l")
 // cleaning the URL
-//history.replaceState(null, "", "/"); // uncomment if commented
+history.replaceState(null, "", "/"); // uncomment if commented
 
 const isEnglish = lang === "en" ? true : false;
 function selectLanguage(source) {
