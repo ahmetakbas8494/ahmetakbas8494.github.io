@@ -144,18 +144,22 @@ label[for="trip-timer-input-amount"] {
   margin: 1rem 0;
 }
 
-.trip-timer-lemon-tek-tutorial-timer {
+.trip-timer-container {
   width: 80%;
   text-align: center;
   margin: 0.5rem 0 0 0;
 }
 
-.trip-timer-lemon-tek-tutorial-minimized .trip-timer-lemon-tek-tutorial-timer {
+.trip-timer-lemon-tek-tutorial-minimized .trip-timer-container {
   margin: 0;
 }
 
-.trip-timer-lemon-tek-tutorial-timer h3 {
+.trip-timer-container h3,
+.trip-timer-container h2,
+.trip-timer-container span {
   color: var(--outline);
+}
+.trip-timer-container h3 {
   font-size: 2rem;
 }
 

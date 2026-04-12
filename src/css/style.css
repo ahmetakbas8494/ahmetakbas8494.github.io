@@ -230,8 +230,11 @@ body::before {
 .trip-timer,
 .trip-timer button,
 .trip-timer-overlay,
-.trip-timer-lemon-tek-tutorial-timer,
-.trip-timer-content-title {
+.trip-timer-container,
+.trip-timer-content-title,
+.shroomsupply,
+.shroomsupply-link,
+.shroomsupply-coupon {
   border-radius: 0.5rem;
   margin: 0.5rem 0;
   background: linear-gradient(
@@ -243,4 +246,48 @@ body::before {
   -webkit-box-shadow: 0 0 0.3rem 0 var(--outline);
   -moz-box-shadow: 0 0 0.3rem 0 var(--outline);
   box-shadow: 0 0 0.3rem 0 var(--outline);
+}
+
+.shroomsupply {
+  display: grid;
+  justify-items: center;
+  margin: 3rem 0 1rem 0;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.shroomsupply h2,
+.shroomsupply p {
+  margin: 0.2rem 1rem;
+}
+
+.shroomsupply-link,
+.shroomsupply-coupon {
+  display: block;
+  color: var(--background-color);
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(
+    10deg,
+    var(--outline) 0%,
+    var(--background-color) 200%
+  );
+  text-decoration: none;
+}
+
+.copy-button {
+  position: relative;
+}
+
+.shroomsupply-coupon-feedback {
+  margin: 0 !important;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: var(--background-color);
+  font-weight: bold;
 }

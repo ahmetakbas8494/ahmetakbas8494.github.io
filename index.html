@@ -25,9 +25,7 @@
         <div></div>
         <img src="src/img/loading-shroom.svg" alt="" />
       </div>
-      <p class="loading-text">
-        loading-text
-      </p>
+      <p class="loading-text">loading-text</p>
     </section>
     <section class="guide-section">
       <h1 class="guide-title">guide-title</h1>
@@ -78,17 +76,20 @@
         <section class="trip-timer">
           <h2 class="trip-timer-title">trip-timer-title</h2>
           <div class="trip-timer-description">trip-timer-description</div>
-          <button class="trip-timer-start" onclick="startTimer()">trip-timer-start</button>
+          <button class="trip-timer-start" onclick="startTimer()">
+            trip-timer-start
+          </button>
           <div class="trip-timer-overlay" minimized="false" stage="1">
             <div class="trip-timer-controls">
-              <button class="trip-timer-minimize" onclick="minimizeTimer()">–</button>
+              <button class="trip-timer-minimize" onclick="minimizeTimer()">
+                –
+              </button>
               <button class="trip-timer-close" onclick="closeTimer()">×</button>
             </div>
-            <div class="trip-timer-content">
-              
-            </div>
-            <button class="trip-timer-next" onclick="nextTimer()" disabled>trip-timer-next</button>
-
+            <div class="trip-timer-content"></div>
+            <button class="trip-timer-next" onclick="nextTimer()" disabled>
+              trip-timer-next
+            </button>
           </div>
         </section>
 
@@ -132,7 +133,26 @@
             </div>
           </div>
         </div>
-      </>
+
+        <div class="shroomsupply">
+          <h2 class="shroomsupply-title">shroomsupply-title</h2>
+          <p class="shroomsupply-description">shroomsupply-description</p>
+          <a
+            rel="noopener"
+            href="https://shroomsupply.pl"
+            target="_blank"
+            class="shroomsupply-link"
+            >shroomsupply-link</a
+          >
+          <p class="shroomsupply-coupon-title">shroomsupply-coupon-title</p>
+          <div class="copy-button">
+            <p class="shroomsupply-coupon">shroomsupply-coupon</p>
+            <p class="shroomsupply-coupon-feedback">
+              shroomsupply-coupon-feedback
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   </body>
 </html>

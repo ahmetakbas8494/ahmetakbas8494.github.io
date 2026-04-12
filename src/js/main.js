@@ -1,13 +1,27 @@
 // manually setting default language to polish
 // let lang = "pl"; // either "en" or "pl"
 
+const storagePrefix = "trip";
+// trip Dosage
+// trip Type
+// trip TimestampTrip
+// trip TimestampLemonTek
+
+function saveConfig(itemName, item) {
+  localStorage.setItem(storagePrefix + itemName, item);
+}
+
+function loadConfig(itemName) {
+  return localStorage.getItem(storagePrefix + itemName);
+}
+
 // getting parameters from URL
 const params = new URLSearchParams(window.location.search);
-const type = params.get("t");
+const type = params.get("t") ? params.get("t") : loadConfig("Shroom");
 let weight = params.get("w");
 weight =
   parseFloat(weight) > 0 ? parseFloat(weight.replace(/[^0-9.]/g, "")) : weight;
-let lang = params.get("l");
+let lang = params.get("l") ? params.get("l") : loadConfig("Language");
 // cleaning the URL
 history.replaceState(null, "", "/"); // uncomment if commented
 
@@ -35,9 +49,60 @@ const tripTimerDescription = document.querySelector(".trip-timer-description");
 const tripTimerStart = document.querySelector(".trip-timer-start");
 const tripTimerNext = document.querySelector(".trip-timer-next");
 
+// shroomsupply segment
+const shroomsupplyTitle = document.querySelector(".shroomsupply-title");
+const shroomsupplyDescription = document.querySelector(
+  ".shroomsupply-description",
+);
+const shroomsupplyLink = document.querySelector(".shroomsupply-link");
+const shroomsupplyCouponTitle = document.querySelector(
+  ".shroomsupply-coupon-title",
+);
+const shroomsupplyCoupon = document.querySelector(".shroomsupply-coupon");
+const shroomsupplyCouponFeedback = document.querySelector(
+  ".shroomsupply-coupon-feedback",
+);
+
+shroomsupplyTitle.innerText = selectLanguage(shroomSupplyTranslation.title);
+shroomsupplyDescription.innerText = selectLanguage(
+  shroomSupplyTranslation.description,
+);
+shroomsupplyLink.innerText = selectLanguage(shroomSupplyTranslation.link);
+shroomsupplyCouponTitle.innerText = selectLanguage(
+  shroomSupplyTranslation.coupon.label,
+);
+shroomsupplyCoupon.innerText = shroomSupplyTranslation.coupon.code;
+
+shroomsupplyCoupon.onclick = () => {
+  const code = "SHROOM10";
+  const copyAnimation = (btnContent) => {
+    shroomsupplyCoupon.style.scale = "0.9";
+    shroomsupplyCoupon.style.color = "var(--background-color-invisible)";
+    shroomsupplyCouponFeedback.innerText = selectLanguage(btnContent);
+    shroomsupplyCouponFeedback.style.opacity = "1";
+    setTimeout(() => {
+      shroomsupplyCoupon.style.color = "var(--background-color)";
+      shroomsupplyCoupon.style.scale = "1";
+      shroomsupplyCouponFeedback.style.opacity = "0";
+    }, 1000);
+  };
+
+  navigator.clipboard
+    .writeText(code)
+    .then(() => {
+      copyAnimation(shroomSupplyTranslation.coupon.feedback.positive);
+      console.log("Kod skopiowany do schowka!");
+    })
+    .catch((err) => {
+      copyAnimation(shroomSupplyTranslation.coupon.feedback.negative);
+      console.error("Błąd podczas kopiowania: ", err);
+    });
+};
+
 // getting images to load correct representations of the mushroom
 const aboutImage = document.querySelector(".about-image");
 
+lemonTekTitle.innerText = selectLanguage(lemonTekTranslation.title);
 for (let step of steps) {
   let stepNumber = step.getAttribute("step");
   step.querySelector("h3").innerText =
@@ -59,13 +124,18 @@ if (type === "mel") {
   infoTitle.innerText = selectLanguage(guideTranslation.info.title);
   infoDescription.innerText = selectLanguage(guideTranslation.info.description);
   dosageTitle.innerText = selectLanguage(dosageTranslation.title);
-  bagContentAmount.innerText = weight + "g";
-  bagContentTitle.innerText =
-    selectLanguage(guideTranslation.bag.content)[0] +
-    " " +
-    weight +
-    selectLanguage(guideTranslation.bag.content)[1];
-  lemonTekTitle.innerText = selectLanguage(lemonTekTranslation.title);
+
+  if (weight === null || isNaN(weight) || weight <= 0)
+    document.querySelector(".bag-content").remove();
+  else {
+    bagContentAmount.innerText = weight + "g";
+    bagContentTitle.innerText =
+      selectLanguage(guideTranslation.bag.content)[0] +
+      " " +
+      weight +
+      selectLanguage(guideTranslation.bag.content)[1];
+  }
+
   tripTimerTitle.innerText = selectLanguage(timerTranslation.tripTimerTitle);
   tripTimerDescription.innerText = selectLanguage(
     timerTranslation.tripTimerDescription,

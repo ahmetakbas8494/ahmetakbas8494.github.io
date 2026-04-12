@@ -4,12 +4,28 @@ const tripTimerStage = () => {
 };
 const tripTimerContent = document.querySelector(".trip-timer-content");
 const tripTimerNextButton = document.querySelector(".trip-timer-next");
+const tripTimerCloseButton = document.querySelector(".trip-timer-close");
 
-const storagePrefix = "trip";
-// tripDosage
-// tripType
-// tripTimestampTrip
-// tripTimestampLemonTek
+const toggleCloseButton = (to = null) => {
+  const attribute = "disabled";
+  const currentOpacity = tripTimerCloseButton.style.opacity;
+  let opacity =
+    to != null
+      ? to
+        ? "1"
+        : "0.5"
+      : currentOpacity === "" || currentOpacity === "1"
+        ? "0.5"
+        : "1";
+  let changeAttribute = opacity === "0.5" ? "remove" : "add";
+
+  if (changeAttribute === "remove")
+    tripTimerCloseButton.setAttribute(attribute, "");
+  else tripTimerCloseButton.removeAttribute(attribute);
+
+  tripTimerCloseButton.style.opacity = opacity;
+  return (opacity, changeAttribute);
+};
 
 const formatTime = (num) => {
   return String(num).length === 1 ? "0" + String(num) : num;
@@ -19,39 +35,56 @@ function secondsPassed(fromDate) {
   return Math.floor((fromDate.getTime() - Date.now()) / 1000);
 }
 
-function isActiveTimestamp() {
-  const loadedTimestamp = loadConfig("TimestampLemonTek");
+function isActiveTimestamp(timestampType) {
+  const loadedTimestamp = loadConfig(timestampType);
   let timestamp = loadedTimestamp != null ? parseInt(loadedTimestamp) : null;
   let date = new Date(timestamp);
 
   return timestamp != null && secondsPassed(date) > 0 ? true : false;
 }
 
-function countdown(time, type = "hours", element) {
-  const isHours = type === "hours"; // else type = "minutes"
+function countdown(time, type = "hours", element, timestampType) {
+  let isHours = type === "hours"; // else type = "minutes"
+  const isTimestampTrip = timestampType === "TimestampTrip";
+  const timeToEnd = isTimestampTrip ? time.end : null;
+  time = isTimestampTrip ? time.start : time;
   time = isHours ? time * 3600 : time * 60;
-  const loadedTimestamp = loadConfig("TimestampLemonTek");
+
+  const loadedTimestamp = loadConfig(timestampType);
   let timestamp = loadedTimestamp != null ? parseInt(loadedTimestamp) : null;
   let date = new Date(timestamp);
 
   // ignore previous timestamp if it was made long ago
   // if (timestamp === null || timestamp === NaN || secondsPassed(date) <= 0) {
-  if (!isActiveTimestamp()) {
+  if (!isActiveTimestamp(timestampType)) {
     timestamp = new Date().getTime() + time * 1000;
     date = new Date(timestamp);
-    saveConfig("TimestampLemonTek", timestamp);
+    saveConfig(timestampType, timestamp);
+  }
+
+  if (isTimestampTrip && element.nodeName === "H2") {
+    timestamp = new Date(timestamp).getTime() - timeToEnd * 60000;
+    date = new Date(timestamp);
+    const isLesserThanAnHour = secondsPassed(date) / 60 < 60;
+    type = isLesserThanAnHour ? "minutes" : "hours";
+    isHours = type === "hours";
+  }
+
+  if (isTimestampTrip) {
   }
 
   const tempInterval = setInterval(() => {
     // get the exact remaining seconds based on the target timestamp
     const remainingSeconds = secondsPassed(date);
     const doReset = () => {
-      return loadConfig("TimestampLemonTek") === "reset";
+      return loadConfig(timestampType) === "reset";
     };
-
-    if (remainingSeconds <= 0 || doReset()) {
+    const doHardReset = () => {
+      return loadConfig(timestampType + "Reset") === "hardreset";
+    };
+    if (remainingSeconds <= 0 || doReset() || doHardReset()) {
       clearInterval(tempInterval);
-      saveConfig("TimestampLemonTek", "");
+      if (!doHardReset()) saveConfig(timestampType, "0");
       element.innerText = doReset()
         ? isHours
           ? "00:00:00"
@@ -59,16 +92,24 @@ function countdown(time, type = "hours", element) {
         : isHours
           ? formatTime(time / 3600) + ":00:00"
           : formatTime(time / 60) + ":00";
-      const tripTimerTimerPlayButton = document.querySelector(
-        ".trip-timer-timer-play-button",
-      );
-      tripTimerTimerPlayButton.removeAttribute("reset");
+      if (isTimestampTrip) {
+        element.innerText = "00:00";
+        element.style.opacity = 0.5;
+      }
+      if (!doHardReset()) toggleCloseButton(true);
+
+      if (timestampType === "TimestampLemonTek") {
+        const tripTimerTimerPlayButton = document.querySelector(
+          ".trip-timer-timer-play-button",
+        );
+        tripTimerTimerPlayButton.removeAttribute("reset");
+      }
       // tripTimerTimerPlayButton.classList.remove(
       //   "trip-timer-timer-play-button-hidden",
       // );
       return;
     }
-
+    if (element.style.opacity != 1) element.style.opacity = 1;
     // calculate time segments directly from the remaining seconds
     const h = isHours ? formatTime(Math.floor(remainingSeconds / 3600)) : null;
     const min = isHours
@@ -79,20 +120,12 @@ function countdown(time, type = "hours", element) {
     let formattedTime = isHours ? h + ":" : "";
     formattedTime += min + ":" + sec;
     element.innerText = formattedTime;
-  }, 500);
-}
-
-function saveConfig(itemName, item) {
-  localStorage.setItem(storagePrefix + itemName, item);
-}
-
-function loadConfig(itemName) {
-  return localStorage.getItem(storagePrefix + itemName);
+  }, 100);
 }
 
 function startTimer() {
   const className = "trip-timer-overlay-show";
-  if (tripTimerOverlay.classList.contains(className)) return;
+  if (tripTimerContent.childElementCount != 0) return;
   tripTimerOverlay.classList.add(className);
   loadStage(tripTimerStage());
 }
@@ -106,7 +139,8 @@ function minimizeTimer() {
   } else {
     tripTimerOverlay.classList.add("trip-timer-overlay-minimize");
   }
-  if (tripTimerStage() === 7) {
+  // if (tripTimerStage() === 7) {
+  if ([7, 9].includes(tripTimerStage())) {
     if (isMinimized)
       tripTimerContent.classList.remove(
         "trip-timer-lemon-tek-tutorial-minimized",
@@ -137,7 +171,9 @@ function nextTimer(el = null) {
     );
   else if (currentStage === 2) {
     const selectedMethod = el.getAttribute("method");
+    if (loadConfig("Type") != selectedMethod) saveConfig("TimestampTrip", "");
     saveConfig("Type", selectedMethod);
+    saveConfig("TimestampTripReset", "");
     nextStage = selectedMethod === "dry" ? 8 : nextStage;
   }
   tripTimerOverlay.setAttribute("stage", nextStage);
@@ -148,6 +184,9 @@ function nextTimer(el = null) {
 }
 
 function loadStage(num) {
+  // force enable close button
+  toggleCloseButton(true);
+
   num = parseInt(num);
   console.log("Loading stage " + num);
   const stageTranslation = timerTranslation.tripTimerStages["stage" + num];
@@ -160,9 +199,11 @@ function loadStage(num) {
   tripTimerContent.appendChild(tripTimerContentTitle);
 
   // unhide the skip (next) button
-  if ([1, 2, 8, 9].includes(num))
-    tripTimerNextButton.setAttribute("disabled", "");
+  if ([1, 2, 9].includes(num)) tripTimerNextButton.setAttribute("disabled", "");
   else tripTimerNextButton.removeAttribute("disabled", "");
+
+  // hide close button for timer stages
+  toggleCloseButton([7, 9].includes(num) ? false : true);
 
   // stage 1: choosing amount of shrooms for consumption
   if (num === 1) {
@@ -290,14 +331,10 @@ function loadStage(num) {
     // stage 7: timer
     if (num === 7) {
       const tripTimerLemonTekTutorialTimer = document.createElement("div");
-      tripTimerLemonTekTutorialTimer.classList.add(
-        "trip-timer-lemon-tek-tutorial-timer",
-      );
+      tripTimerLemonTekTutorialTimer.classList.add("trip-timer-container");
 
       // 20 minute timer
       const tripTimerTimer = document.createElement("h3");
-      tripTimerTimer.setAttribute("timeType", "minutes");
-      tripTimerTimer.setAttribute("time", "20");
       tripTimerTimer.innerText = "20:00";
 
       const tripTimerTimerPlayButton = document.createElement("button");
@@ -312,27 +349,29 @@ function loadStage(num) {
       //   countdown(20, "minutes", tripTimerTimer);
       // };
 
-      const thisCountDown = () => countdown(20, "minutes", tripTimerTimer);
+      const thisCountDown = () =>
+        countdown(20, "minutes", tripTimerTimer, "TimestampLemonTek");
 
-      if (isActiveTimestamp()) {
+      if (isActiveTimestamp("TimestampLemonTek")) {
         tripTimerTimerPlayButton.setAttribute("reset", "");
         tripTimerTimerPlayButton.innerText = "Reset";
         thisCountDown();
       }
 
       tripTimerTimerPlayButton.addEventListener("click", () => {
+        tripTimerTimerPlayButton.setAttribute("disabled", "");
         tripTimerTimerPlayButton.style.transform = "scale(0.9)";
-        setTimeout(
-          () => (tripTimerTimerPlayButton.style.transform = "scale(1)"),
-          500,
-        );
+        setTimeout(() => {
+          tripTimerTimerPlayButton.removeAttribute("disabled");
+          tripTimerTimerPlayButton.style.transform = "scale(1)";
+        }, 500);
 
         if (tripTimerTimerPlayButton.hasAttribute("reset")) {
           tripTimerTimerPlayButton.innerText = "▶︎";
           saveConfig("TimestampLemonTek", "reset");
         } else {
           tripTimerTimerPlayButton.setAttribute("reset", "");
-          saveConfig("TimestampLemonTek", "reset");
+          //saveConfig("TimestampLemonTek", "reset");
           tripTimerTimerPlayButton.innerText = "Reset";
           thisCountDown();
         }
@@ -348,4 +387,120 @@ function loadStage(num) {
   // === === ===  === === ===
 
   // stage 8: getting ready to consume the mushroom
+  else if (num === 8) {
+    let img = "src/img/";
+    const tripType = loadConfig("Type");
+    img += tripType === "lemontek" ? "lt-5.png" : "golden-teacher.png";
+
+    const tripTimerConsumptionImg = document.createElement("img");
+    tripTimerConsumptionImg.src = img;
+    tripTimerConsumptionImg.style.width = "6rem";
+    tripTimerConsumptionImg.style.aspectRatio = "1/1";
+
+    const tripTimerConsumptionDescription = document.createElement("p");
+    tripTimerConsumptionDescription.innerText = selectLanguage(
+      stageTranslation.description[tripType],
+    );
+
+    for (let e of [tripTimerConsumptionImg, tripTimerConsumptionDescription])
+      tripTimerContent.appendChild(e);
+  }
+
+  // stage 9: ultimate trip timer
+  else if (num === 9) {
+    const spacing = "0.5rem";
+    const ultimateTimerContainer = document.createElement("div");
+    ultimateTimerContainer.classList.add("trip-timer-container");
+    ultimateTimerContainer.style.paddingBottom = spacing;
+    const tripType = loadConfig("Type");
+    const buttonData = stageTranslation.tripUltimateTimer;
+
+    const tripTimerTimerPlayButton = document.createElement("button");
+    tripTimerTimerPlayButton.classList.add("trip-timer-timer-play-button");
+    tripTimerTimerPlayButton.innerText = "Reset";
+    tripTimerTimerPlayButton.style.position = "relative";
+    tripTimerTimerPlayButton.style.top = "1rem";
+
+    tripTimerTimerPlayButton.onclick = () => {
+      saveConfig("TimestampTripReset", "hardreset");
+      saveConfig("TimestampTrip", "0");
+      tripTimerTimerPlayButton.style.scale = "0.9";
+      tripTimerTimerPlayButton.setAttribute("disabled", "");
+      setTimeout(() => {
+        tripTimerTimerPlayButton.style.scale = "1";
+        tripTimerTimerPlayButton.removeAttribute("disabled");
+        saveConfig("TimestampTripReset", "run");
+        setTimeout(() => {
+          saveConfig("TimestampTripReset", "");
+        }, 500);
+      }, 500);
+    };
+
+    const buttonElement = (buttonInfo) => {
+      const effectsFade = buttonData.effectsFade;
+      const isEndOfTrip = buttonInfo === effectsFade;
+      const buttonTime = buttonInfo.time[tripType];
+
+      // checking is the time length of the button is smaller than an hour
+      const minutesToHours = buttonTime / 60;
+      const countdownType = buttonTime < 60 ? "minutes" : "hours";
+      const countdownValue =
+        countdownType === "hours" ? minutesToHours : buttonTime;
+
+      const buttonText = "00:00";
+
+      const btn = document.createElement(isEndOfTrip ? "h3" : "h2");
+      btn.style.margin = 0;
+      btn.innerText = buttonText;
+
+      const btnDescription = document.createElement("span");
+      btnDescription.style.display = "block";
+      btnDescription.style.marginTop = spacing;
+      btnDescription.innerText = selectLanguage(buttonInfo.name);
+
+      const thisCountdown = () =>
+        countdown(
+          {
+            start: countdownValue,
+            end: effectsFade.time[tripType] - buttonTime,
+          },
+          countdownType,
+          btn,
+          "TimestampTrip",
+        );
+
+      thisCountdown();
+      setInterval(() => {
+        const allButtons = ultimateTimerContainer.querySelectorAll("h2");
+        const soberBrain = allButtons[allButtons.length - 2];
+        if (
+          loadConfig("TimestampTripReset") === "run" &&
+          soberBrain.innerText === "00:00" &&
+          btn.innerText === "00:00"
+        ) {
+          thisCountdown();
+        }
+      }, 100);
+
+      for (let e of [btnDescription, btn])
+        ultimateTimerContainer.appendChild(e);
+      return btn;
+    };
+
+    for (let e of [
+      "effectsFade",
+      "peakStart",
+      "peakEnd",
+      "saturatedColors",
+      "firstHallucinations",
+      "biggerPupils",
+      "smallerPupils",
+      "soberBrain",
+      "sleep",
+    ])
+      buttonElement(buttonData[e]);
+
+    tripTimerContent.appendChild(ultimateTimerContainer);
+    tripTimerContent.appendChild(tripTimerTimerPlayButton);
+  }
 }

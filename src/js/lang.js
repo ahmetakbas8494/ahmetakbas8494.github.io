@@ -157,8 +157,65 @@ const timerTranslation = {
     },
     stage8: {
       tripTimerContentTitle: {
-        en: "Konsumpcja",
+        en: "Consumption",
         pl: "Konsumpcja",
+      },
+      description: {
+        dry: {
+          en: "Eat the mushrooms and drink some water if needed. When you are finished, proceed to the next stage to start the timer.",
+          pl: "Zjedz grzyby, w razie potrzeby popijając wodą. Po zakończeniu przejdź do kolejnego etapu, aby uruchomić timer.",
+        },
+        lemontek: {
+          en: "Drink the prepared mixture. When you are ready, proceed to the next stage to start the timer.",
+          pl: "Wypij przygotowaną miksturę. Gdy będziesz gotowy, przejdź do kolejnego etapu, aby uruchomić timer.",
+        },
+      },
+    },
+    stage9: {
+      tripTimerContentTitle: {
+        en: "Trip Timer",
+        pl: "Timer tripa",
+      },
+      tripUltimateTimer: {
+        biggerPupils: {
+          name: { en: "Bigger pupils", pl: "Źrenice się powiększą" },
+          time: { dry: 20, lemontek: 12 },
+        },
+        saturatedColors: {
+          name: { en: "Saturated colors", pl: "Kolory bardziej nasycone" },
+          time: { dry: 27, lemontek: 10 },
+        },
+        firstHallucinations: {
+          name: { en: "First hallucinations", pl: "Pierwsze halucynacje" },
+          time: { dry: 40, lemontek: 18 },
+        },
+        peakStart: {
+          name: { en: "Peak starts", pl: "Początek szczytu (Peak)" },
+          time: { dry: 100, lemontek: 50 },
+        },
+        peakEnd: {
+          name: { en: "Peak ends", pl: "Koniec szczytu (Peak)" },
+          time: { dry: 200, lemontek: 120 },
+        },
+        smallerPupils: {
+          name: {
+            en: "Pupils start to shrink",
+            pl: "Źrenice zaczną się pomniejszać",
+          },
+          time: { dry: 310, lemontek: 240 },
+        },
+        effectsFade: {
+          name: { en: "Effects fade away", pl: "Efekty zanikną" },
+          time: { dry: 280, lemontek: 210 },
+        },
+        soberBrain: {
+          name: { en: "Sober mind", pl: "Mózg trzeźwy" },
+          time: { dry: 470, lemontek: 360 },
+        },
+        sleep: {
+          name: { en: "Can go to sleep", pl: "Można pójść spać" },
+          time: { dry: 420, lemontek: 280 },
+        },
       },
     },
   },
@@ -223,5 +280,35 @@ const guideTranslation = {
   denied: {
     en: "Access denied\nScan QR code on the bag",
     pl: "Odmowa dostępu\nZeskanuj kod QR z torby",
+  },
+};
+
+// shroomsupply
+const shroomSupplyTranslation = {
+  title: {
+    en: "Automatic Growkits",
+    pl: "Automatyczne Growkity",
+  },
+  description: {
+    en: "A solution for those looking for maintenance-free cultivation. Growkits from ShroomSupply.pl do not require watering or air exchange—simply place them in the right spot and wait for the results.",
+    pl: "Rozwiązanie dla osób szukających uprawy bezobsługowej. Zestawy od ShroomSupply.pl nie wymagają podlewania ani wachlowania, gdyż wystarczy umieścić je w odpowiednim miejscu i czekać na efekty.",
+  },
+  link: {
+    en: "ShroomSupply.pl",
+    pl: "ShroomSupply.pl",
+  },
+  coupon: {
+    label: { en: "Discount code", pl: "Kod rabatowy" },
+    feedback: {
+      positive: {
+        en: "Copied",
+        pl: "Skopiowano",
+      },
+      negative: {
+        en: "Error",
+        pl: "Błąd",
+      },
+    },
+    code: "SHROOM10",
   },
 };
