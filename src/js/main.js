@@ -22,6 +22,10 @@ let weight = params.get("w");
 weight =
   parseFloat(weight) > 0 ? parseFloat(weight.replace(/[^0-9.]/g, "")) : weight;
 let lang = params.get("l") ? params.get("l") : loadConfig("Language");
+
+saveConfig("Language", lang);
+saveConfig("Shroom", type);
+
 // cleaning the URL
 history.replaceState(null, "", "/"); // uncomment if commented
 
@@ -91,11 +95,10 @@ shroomsupplyCoupon.onclick = () => {
     .writeText(code)
     .then(() => {
       copyAnimation(shroomSupplyTranslation.coupon.feedback.positive);
-      console.log("Kod skopiowany do schowka!");
     })
     .catch((err) => {
       copyAnimation(shroomSupplyTranslation.coupon.feedback.negative);
-      console.error("Błąd podczas kopiowania: ", err);
+      console.error(err);
     });
 };
 

@@ -188,7 +188,7 @@ function loadStage(num) {
   toggleCloseButton(true);
 
   num = parseInt(num);
-  console.log("Loading stage " + num);
+  //console.log("Loading stage " + num);
   const stageTranslation = timerTranslation.tripTimerStages["stage" + num];
 
   const tripTimerContentTitle = document.createElement("h1");
