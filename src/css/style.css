@@ -291,3 +291,7 @@ body::before {
   color: var(--background-color);
   font-weight: bold;
 }
+
+.trip-timer-overlay {
+  z-index: 100;
+}
